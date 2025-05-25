@@ -25,12 +25,12 @@ public class SecureKeyItem extends Item {
         if (!stack.hasNbt()) return false;
         NbtCompound tag = stack.getNbt();
         return tag != null
-            && lockId.equals(tag.getString("LockID"))
-            && ownerUuid.equals(tag.getUuid("OwnerUUID"));
+                && lockId.equals(tag.getString("LockID"))
+                && ownerUuid.equals(tag.getUuid("OwnerUUID"));
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, net.minecraft.client.item.TooltipContext context) {
+    public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
         if (stack.hasNbt()) {
             NbtCompound tag = stack.getNbt();
             tooltip.add(Text.literal("🔐 열쇠 ID: " + tag.getString("LockID")).formatted(Formatting.GRAY));
