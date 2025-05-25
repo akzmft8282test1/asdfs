@@ -1,31 +1,21 @@
-package com.yourname.securelock;
+package com.example.securelock;
 
+import com.example.securelock.item.SecureKeyItem;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class SecureLockMod implements ModInitializer {
     public static final String MOD_ID = "securelock";
-    public static final Logger LOGGER = LoggerFactory.getLogger("SecureLock");
 
-    public static final Item LOCK_ITEM = new Item(new FabricItemSettings());
-    public static final Item KEY_ITEM = new Item(new FabricItemSettings());
+    public static final Item SECURE_KEY = new SecureKeyItem(new FabricItemSettings().maxCount(1));
 
     @Override
     public void onInitialize() {
-        LOGGER.info("🔐 SecureLock Mod Initialized!");
-
-        ModItems.register(); //아이템 등록
-
-        // 서버 시작 시 비밀번호 레지스트리 로딩
-        ServerLifecycleEvents.SERVER_STARTED.register(server -> PasswordRegistry.init(server));
-
-        // 자물쇠 및 열쇠 아이템 등록
-        Registry.register(Registry.ITEM, new Identifier(MOD_ID, "lock"), LOCK_ITEM);
-        Registry.register(Registry.ITEM, new Identifier(MOD_ID, "key"), KEY_ITEM);
+        Registry.register(Registries.ITEM, new Identifier(MOD_ID, "secure_key"), SECURE_KEY);
+        System.out.println("[SecureLock] 열쇠 아이템 등록 완료");
     }
 }
