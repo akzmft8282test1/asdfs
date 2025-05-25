@@ -21,6 +21,9 @@ public class SecureLockMod implements ModInitializer {
 
         ModItems.register(); //아이템 등록
 
+        // 서버 시작 시 비밀번호 레지스트리 로딩
+        ServerLifecycleEvents.SERVER_STARTED.register(server -> PasswordRegistry.init(server));
+
         // 자물쇠 및 열쇠 아이템 등록
         Registry.register(Registry.ITEM, new Identifier(MOD_ID, "lock"), LOCK_ITEM);
         Registry.register(Registry.ITEM, new Identifier(MOD_ID, "key"), KEY_ITEM);
