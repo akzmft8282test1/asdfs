@@ -6,36 +6,32 @@ import java.security.SecureRandom;
 import java.util.Base64;
 
 public class SecurePasswordUtil {
-    private static final int ITERATIONS = 1000;
+    private static final SecureRandom RANDOM = new SecureRandom();
 
     public static String generateSalt() {
         byte[] salt = new byte[16];
-        new SecureRandom().nextBytes(salt);
+        RANDOM.nextBytes(salt);
         return Base64.getEncoder().encodeToString(salt);
     }
 
     public static String hashPassword(String password, String salt) {
         try {
-            byte[] result = (password + salt).getBytes(StandardCharsets.UTF_8);
-
-            // SHA-512 반복 적용
             MessageDigest sha512 = MessageDigest.getInstance("SHA-512");
-            for (int i = 0; i < ITERATIONS; i++) {
-                result = sha512.digest(result);
+            MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
+
+            byte[] hash = (password + salt).getBytes(StandardCharsets.UTF_8);
+            for (int i = 0; i < 5; i++) { // 반복 강화
+                hash = sha512.digest(hash);
+                hash = sha256.digest(hash);
             }
 
-            // SHA-256로 최종 해싱
-            MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
-            result = sha256.digest(result);
-
-            return Base64.getEncoder().encodeToString(result);
+            return Base64.getEncoder().encodeToString(hash);
         } catch (Exception e) {
-            throw new RuntimeException("비밀번호 해시 실패", e);
+            throw new RuntimeException("Hash error", e);
         }
     }
 
-    public static boolean validatePassword(String inputPassword, String salt, String expectedHash) {
-        String inputHash = hashPassword(inputPassword, salt);
-        return expectedHash.equals(inputHash);
+    public static boolean verify(String password, String salt, String expectedHash) {
+        return hashPassword(password, salt).equals(expectedHash);
     }
 }
