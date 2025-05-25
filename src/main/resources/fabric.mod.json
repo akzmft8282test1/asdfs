@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "securelock",
+  "version": "${version}",
+  "name": "Secure Lock",
+  "description": "A powerful lock & key system with encryption and security.",
+  "authors": ["YourName"],
+  "contact": {
+    "homepage": "https://github.com/akzmft8282test1/asdfs",
+    "sources": "https://github.com/akzmft8282test1/asdfs"
+  },
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.yourname.securelock.SecureLockMod"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.15.11",
+    "fabric": "*",
+    "minecraft": "1.21.4"
+  }
+}
