@@ -1,4 +1,4 @@
-package com.example.securelock.item;
+package com.yourname.securelock.item;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
