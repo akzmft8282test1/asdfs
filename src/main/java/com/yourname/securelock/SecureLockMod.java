@@ -1,6 +1,6 @@
-package com.example.securelock;
+package com.yourname.securelock;
 
-import com.example.securelock.item.SecureKeyItem;
+import com.yourname.securelock.item.SecureKeyItem;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
