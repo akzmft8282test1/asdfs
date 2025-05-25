@@ -7,6 +7,8 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import com.yourname.securelock.command.SecureKeyCommand;
 
 public class SecureLockMod implements ModInitializer {
     public static final String MOD_ID = "securelock";
@@ -17,5 +19,8 @@ public class SecureLockMod implements ModInitializer {
     public void onInitialize() {
         Registry.register(Registries.ITEM, new Identifier(MOD_ID, "secure_key"), SECURE_KEY);
         System.out.println("[SecureLock] 열쇠 아이템 등록 완료");
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
+            SecureKeyCommand.register(dispatcher);
+        });
     }
 }
