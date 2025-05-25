@@ -19,6 +19,8 @@ public class SecureLockMod implements ModInitializer {
     public void onInitialize() {
         LOGGER.info("🔐 SecureLock Mod Initialized!");
 
+        ModItems.register(); //아이템 등록
+
         // 자물쇠 및 열쇠 아이템 등록
         Registry.register(Registry.ITEM, new Identifier(MOD_ID, "lock"), LOCK_ITEM);
         Registry.register(Registry.ITEM, new Identifier(MOD_ID, "key"), KEY_ITEM);
