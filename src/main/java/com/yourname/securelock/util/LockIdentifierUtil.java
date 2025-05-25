@@ -1,4 +1,4 @@
-package com.example.securelock.util;
+package com.yourname.securelock.util;
 
 import java.util.UUID;
 
